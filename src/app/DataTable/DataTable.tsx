@@ -18,109 +18,8 @@ interface Answer {
   submitted_at: string;
 }
 
-const mockData: Answer[] = [
-  {
-    id: '1',
-    survey_title: 'Jakarta Political Social Mapping 2024',
-    question_text: 'What is your opinion on the current political situation in Jakarta?',
-    answer_text: 'I believe the current political situation is quite dynamic and requires careful consideration.',
-    submitted_at: '2024-01-20 14:30:00',
-  },
-  {
-    id: '2',
-    survey_title: 'Surabaya Voice Mapping Survey',
-    question_text: 'How do you perceive the voice of Surabaya residents in the current political landscape?',
-    answer_text: 'The voice of Surabaya residents is often overlooked, and there needs to be more representation.',
-    submitted_at: '2024-01-20 14:25:00',
-  },
-  {
-    id: '3',
-    survey_title: 'Bandung Economic Survey 2024',
-    question_text: 'What are your thoughts on the economic development in Bandung?',
-    answer_text: 'I think the economic development in Bandung is promising, but there are still many challenges to address.',
-    submitted_at: '2024-01-20 14:20:00',
-  },
-  {
-    id: '4',
-    survey_title: 'Brand Equity Analysis',
-    question_text: 'How do you evaluate the brand equity of local products?',
-    answer_text: 'I believe local products have strong brand equity, but they need more marketing support.',
-    submitted_at: '2024-01-20 14:15:00',
-  },
-  {
-    id: '5',
-    survey_title: 'Bandung Barat Survey 2024',
-    question_text: 'How do you assess the development in Bandung Barat?',
-    answer_text: 'The development in Bandung Barat is progressing well, but there are still areas that need improvement.',
-    submitted_at: '2024-01-20 14:15:00',
-  },
-  {
-    id: '6',
-    survey_title: 'Policy Evaluation Survey',
-    question_text: 'How effective do you find the current policies in addressing social issues?',
-    answer_text: 'I think the current policies are a good start, but more needs to be done to address the root causes of social issues.',
-    submitted_at: '2024-01-20 14:10:00',
-  },
-  {
-    id: '7',
-    survey_title: 'Jakarta Political Social Mapping 2024',
-    question_text: 'What is your opinion on the current political situation in Jakarta?',
-    answer_text: 'I believe the current political situation is quite dynamic and requires careful consideration.',
-    submitted_at: '2024-01-20 14:30:00',
-  },
-  {
-    id: '8',
-    survey_title: 'Medan Kota Survey 2024',
-    question_text: 'How do you evaluate the development in Medan Kota?',
-    answer_text: 'The development in Medan Kota is on the right track, but there are still many challenges to overcome.',
-    submitted_at: '2024-01-20 14:10:00',
-  },
-  {
-    id: '9',
-    survey_title: 'Jakarta Timur Survey 2024',
-    question_text: 'What are your thoughts on the social issues in Jakarta Timur?',
-    answer_text: 'Social issues in Jakarta Timur are complex and require a multi-faceted approach.',
-    submitted_at: '2024-01-20 14:05:00',
-  },
-  {
-    id: '10',
-    survey_title: 'Jakarta Political Social Mapping 2024',
-    question_text: 'What is your opinion on the current political situation in Jakarta?',
-    answer_text: 'I believe the current political situation is quite dynamic and requires careful consideration.',
-    submitted_at: '2024-01-20 14:30:00',
-  },
-  {
-    id: '11',
-    survey_title: 'Jakarta Political Social Mapping 2024',
-    question_text: 'What is your opinion on the current political situation in Jakarta?',
-    answer_text: 'I believe the current political situation is quite dynamic and requires careful consideration.',
-    submitted_at: '2024-01-20 14:30:00',
-  },
-  {
-    id: '12',
-    survey_title: 'Jakarta Timur Survey 2024',
-    question_text: 'What are your thoughts on the social issues in Jakarta Timur?',
-    answer_text: 'Social issues in Jakarta Timur are complex and require a multi-faceted approach.',
-    submitted_at: '2024-01-20 14:05:00',
-  },
-  {
-    id: '13',
-    survey_title: 'Jakarta Political Social Mapping 2024',
-    question_text: 'What is your opinion on the current political situation in Jakarta?',
-    answer_text: 'I believe the current political situation is quite dynamic and requires careful consideration.',
-    submitted_at: '2024-01-20 14:30:00',
-  },
-  {
-    id: '14',
-    survey_title: 'Jakarta Political Social Mapping 2024',
-    question_text: 'What is your opinion on the current political situation in Jakarta?',
-    answer_text: 'I believe the current political situation is quite dynamic and requires careful consideration.',
-    submitted_at: '2024-01-20 14:30:00',
-  }
-];
-
 export default function DataTable() {
-  const [data, setData] = useState<Answer[]>(mockData);
+  const [data, setData] = useState<Answer[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<keyof Answer>('submitted_at');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
@@ -238,7 +137,7 @@ export default function DataTable() {
             <input
               type="text"
               placeholder="Search surveys, respondents, locations..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="text-black w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

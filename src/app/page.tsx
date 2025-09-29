@@ -136,16 +136,6 @@ export default function Dashboard() {
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-600 mt-2">Political Survey Management Overview</p>
         </div>
-        <div className="flex space-x-3">
-          {/* <button className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-            Export Report
-          </button> */}
-          <button 
-          onClick={() => setAddSurveyOpen(true)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
-            New Survey
-          </button>
-        </div>
       </div>
 
       {/* Key Metrics */}

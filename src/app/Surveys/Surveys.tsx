@@ -211,7 +211,9 @@ export default function Surveys() {
             </select>
           </div>
           <div className="flex items-end">
-            <button className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+            <button 
+            onClick={() => { setSearchTerm(''); setFilterStatus('all'); }}
+            className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
               Reset Filters
             </button>
           </div>
@@ -405,7 +407,7 @@ export default function Surveys() {
                 <label className="block text-sm font-medium text-gray-700">Max Respondents</label>
                 <input title="Max Respondents" type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Questions</label>
                 <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
