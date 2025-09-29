@@ -312,7 +312,6 @@ export default function Surveys() {
         <div className="text-black fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-all duration-300">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
             <h2 className="text-xl font-semibold mb-4">Add New Survey</h2>
-            {/* Form fields for new survey */}
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Title</label>
@@ -329,26 +328,28 @@ export default function Surveys() {
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Questions</label>
-                {questions.map((q, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <input
-                      type="text"
-                      value={q}
-                      onChange={(e) => handleQuestionChange(index, e.target.value)}
-                      placeholder={`Question ${index + 1}`}
-                      className="flex-1 border border-gray-300 rounded-md shadow-sm p-2"
-                    />
-                    {questions.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeQuestionField(index)}
-                        className="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600"
-                      >
-                        ✕
-                      </button>
-                    )}
-                  </div>
-                ))}
+                <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
+                  {questions.map((q, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        value={q}
+                        onChange={(e) => handleQuestionChange(index, e.target.value)}
+                        placeholder={`Question ${index + 1}`}
+                        className="flex-1 border border-gray-300 rounded-md shadow-sm p-2"
+                      />
+                      {questions.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeQuestionField(index)}
+                          className="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
                 <button
                   type="button"
                   onClick={addQuestionField}
@@ -374,7 +375,6 @@ export default function Surveys() {
                 </button>
               </div>
             </form>
-            {/* Close button */}
             <button
               title="Close"
               onClick={() => setAddSurveyOpen(false)}
@@ -392,7 +392,6 @@ export default function Surveys() {
         <div className="text-black fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-all duration-300">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
             <h2 className="text-xl font-semibold mb-4">Edit Survey</h2>
-            {/* Form fields for editing survey */}
             <form className="space-y-4" onSubmit={handleEdit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Title</label>
@@ -406,28 +405,31 @@ export default function Surveys() {
                 <label className="block text-sm font-medium text-gray-700">Max Respondents</label>
                 <input title="Max Respondents" type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
               </div>
+              
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Questions</label>
-                {questions.map((q, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <input
-                      type="text"
-                      value={q}
-                      onChange={(e) => handleQuestionChange(index, e.target.value)}
-                      placeholder={`Question ${index + 1}`}
-                      className="flex-1 border border-gray-300 rounded-md shadow-sm p-2"
-                    />
-                    {questions.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeQuestionField(index)}
-                        className="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600"
-                      >
-                        ✕
-                      </button>
-                    )}
-                  </div>
-                ))}
+                <div className="max-h-60 overflow-y-auto space-y-2 pr-2">
+                  {questions.map((q, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        value={q}
+                        onChange={(e) => handleQuestionChange(index, e.target.value)}
+                        placeholder={`Question ${index + 1}`}
+                        className="flex-1 border border-gray-300 rounded-md shadow-sm p-2"
+                      />
+                      {questions.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeQuestionField(index)}
+                          className="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
                 <button
                   type="button"
                   onClick={addQuestionField}
@@ -436,6 +438,7 @@ export default function Surveys() {
                   + Add Question
                 </button>
               </div>
+
               <div className="flex justify-end space-x-3">
                 <button
                   type="button"
