@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { PlusIcon, EyeIcon, PencilIcon, TrashIcon, DocumentChartBarIcon } from '@heroicons/react/24/outline';
-import { SurveyType, SurveyStatus } from '../types/survey';
+import { SurveyStatus } from '../types/survey';
 import api from '../lib/api';
 import API_ENDPOINTS from '../lib/endpoint';
 import Link from 'next/dist/client/link';
@@ -9,58 +9,12 @@ import Link from 'next/dist/client/link';
 interface Survey {
   id: string;
   title: string;
-  type: SurveyType;
-  location: string;
+  description: string;
   status: SurveyStatus;
-  respondents: number;
-  targetRespondents: number;
-  startDate: string;
-  endDate: string;
+  max_respondents: number;
+  respondent_count: number;
+  Questions?: { id: string; question_text: string }[];
 }
-
-const mockSurveys: Survey[] = [
-  {
-    id: '1',
-    title: 'Jakarta Political Social Mapping 2024',
-    type: SurveyType.POLITICAL_SOCIAL_MAPPING,
-    location: 'Jakarta',
-    status: SurveyStatus.ACTIVE,
-    respondents: 1250,
-    targetRespondents: 2000,
-    startDate: '2024-01-15',
-    endDate: '2024-03-15'
-  },
-  {
-    id: '2',
-    title: 'Surabaya Voice Mapping Survey',
-    type: SurveyType.POLITICAL_VOICE_MAPPING,
-    location: 'Surabaya',
-    status: SurveyStatus.COMPLETED,
-    respondents: 800,
-    targetRespondents: 800,
-    startDate: '2024-01-01',
-    endDate: '2024-02-28'
-  },
-  {
-    id: '3',
-    title: 'Brand Equity Analysis - Consumer Products',
-    type: SurveyType.BRAND_EQUITY,
-    location: 'Bandung',
-    status: SurveyStatus.ACTIVE,
-    respondents: 340,
-    targetRespondents: 500,
-    startDate: '2024-02-01',
-    endDate: '2024-04-01'
-  }
-];
-
-const surveyTypeLabels = {
-  [SurveyType.POLITICAL_SOCIAL_MAPPING]: 'Political Social Mapping',
-  [SurveyType.POLITICAL_VOICE_MAPPING]: 'Political Voice Mapping',
-  [SurveyType.TRACKING_QUICK_COUNT]: 'Tracking & Quick Count',
-  [SurveyType.BRAND_EQUITY]: 'Brand Equity',
-  [SurveyType.POLICY_EVALUATION]: 'Policy Evaluation'
-};
 
 const statusColors = {
   [SurveyStatus.ACTIVE]: 'bg-emerald-100 text-emerald-800',
@@ -69,7 +23,7 @@ const statusColors = {
 };
 
 export default function Surveys() {
-  const [surveys, setSurveys] = useState<Survey[]>(mockSurveys);
+  const [surveys, setSurveys] = useState<Survey[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<SurveyStatus | 'all'>('all');
   const [addSurveyOpen, setAddSurveyOpen] = useState<boolean>(false);
@@ -80,19 +34,19 @@ export default function Surveys() {
   const [questions, setQuestions] = useState<string[]>([]);
   const [targetSurvey, setTargetSurvey] = useState<Survey | null>(null);
 
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const handleDescriptionChange = (e) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
   };
 
-  const handleMaxRespondentsChange = (e) => {
-    setMaxRespondents(e.target.value);
+  const handleMaxRespondentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxRespondents(Number(e.target.value));
   };
 
-  const handleQuestionChange = (index, value) => {
+  const handleQuestionChange = (index: number, value: string) => {
     const updated = [...questions];
     updated[index] = value;
     setQuestions(updated);
@@ -102,12 +56,12 @@ export default function Surveys() {
     setQuestions([...questions, ""]);
   };
 
-  const removeQuestionField = (index) => {
+  const removeQuestionField = (index: number) => {
     const updated = questions.filter((_, i) => i !== index);
     setQuestions(updated);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const newSurvey = {
@@ -126,7 +80,7 @@ export default function Surveys() {
     }
   };
 
-  const handleEdit = async (e) => {
+  const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const updatedSurvey = {
@@ -368,15 +322,15 @@ export default function Surveys() {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Title</label>
-                <input type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleTitleChange} value={title} />
+                <input title="Survey Title" type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleTitleChange} value={title} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows={3} onChange={handleDescriptionChange} value={description}></textarea>
+                <textarea title="Survey Description" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows={3} onChange={handleDescriptionChange} value={description}></textarea>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Max Respondents</label>
-                <input type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
+                <input title="Max Respondents" type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
               </div>
 
               <div className="space-y-2">
@@ -428,6 +382,7 @@ export default function Surveys() {
             </form>
             {/* Close button */}
             <button
+              title="Close"
               onClick={() => setAddSurveyOpen(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >
@@ -447,15 +402,15 @@ export default function Surveys() {
             <form className="space-y-4" onSubmit={handleEdit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Title</label>
-                <input type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleTitleChange} value={title} />
+                <input title="Survey Title" type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleTitleChange} value={title} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows={3} onChange={handleDescriptionChange} value={description}></textarea>
+                <textarea title="Survey Description" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows={3} onChange={handleDescriptionChange} value={description}></textarea>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Max Respondents</label>
-                <input type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
+                <input title="Max Respondents" type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
               </div>
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Questions</label>
@@ -505,6 +460,7 @@ export default function Surveys() {
             </form>
             {/* Close button */}
             <button
+              title="Close"
               onClick={() => setEditSurveyOpen(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >

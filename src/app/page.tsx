@@ -3,12 +3,8 @@ import React, {useState, useEffect} from 'react';
 import StatCard from './components/common/StatCard';
 import {
   DocumentChartBarIcon,
-  UserGroupIcon,
-  ChartBarIcon,
-  ClockIcon
+  UserGroupIcon
 } from '@heroicons/react/24/outline';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Legend } from 'recharts';
-
 import api from './lib/api';
 import API_ENDPOINTS from './lib/endpoint';
 
@@ -77,19 +73,19 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, [surveys, activities]);
 
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const handleDescriptionChange = (e) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
   };
 
-  const handleMaxRespondentsChange = (e) => {
-    setMaxRespondents(e.target.value);
+  const handleMaxRespondentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxRespondents(Number(e.target.value));
   };
 
-  const handleQuestionChange = (index, value) => {
+  const handleQuestionChange = (index: number, value: string) => {
     const updated = [...questions];
     updated[index] = value;
     setQuestions(updated);
@@ -99,12 +95,12 @@ export default function Dashboard() {
     setQuestions([...questions, ""]);
   };
 
-  const removeQuestionField = (index) => {
+  const removeQuestionField = (index: number) => {
     const updated = questions.filter((_, i) => i !== index);
     setQuestions(updated);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const newSurvey = {
@@ -231,15 +227,15 @@ export default function Dashboard() {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Title</label>
-                <input type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleTitleChange} value={title} />
+                <input title="Survey Title" type="text" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleTitleChange} value={title} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Description</label>
-                <textarea className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows={3} onChange={handleDescriptionChange} value={description}></textarea>
+                <textarea title="Survey Description" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows={3} onChange={handleDescriptionChange} value={description}></textarea>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Max Respondents</label>
-                <input type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
+                <input title="Max Respondents" type="number" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" onChange={handleMaxRespondentsChange} value={maxRespondents} />
               </div>
 
               <div className="space-y-2">
@@ -290,8 +286,8 @@ export default function Dashboard() {
                 </button>
               </div>
             </form>
-            {/* Close button */}
             <button
+              title="Close"
               onClick={() => setAddSurveyOpen(false)}
               className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
             >

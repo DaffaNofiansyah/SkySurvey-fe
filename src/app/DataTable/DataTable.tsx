@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { 
   MagnifyingGlassIcon,
   ArrowDownTrayIcon,
-  FunnelIcon,
   ChevronLeftIcon,
   ChevronRightIcon
 } from '@heroicons/react/24/outline';
@@ -120,12 +119,6 @@ const mockData: Answer[] = [
   }
 ];
 
-const statusColors = {
-  completed: 'bg-emerald-100 text-emerald-800',
-  partial: 'bg-orange-100 text-orange-800',
-  abandoned: 'bg-red-100 text-red-800'
-};
-
 export default function DataTable() {
   const [data, setData] = useState<Answer[]>(mockData);
   const [searchTerm, setSearchTerm] = useState('');
@@ -138,7 +131,8 @@ export default function DataTable() {
     const getAnswers = async () => {
       try {
         const response = await api.get(API_ENDPOINTS.ANSWERS);
-        const mappedData = response.data.map(answer => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const mappedData = response.data.map((answer: any) => ({
           id: answer.id,
           survey_title: answer.Question?.Survey?.title || 'N/A',
           question_text: answer.Question?.question_text || 'N/A',
@@ -311,6 +305,7 @@ export default function DataTable() {
             </div>
             <div className="flex items-center space-x-2">
               <button
+                title="Previous Page"
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
                 className="p-2 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -318,6 +313,7 @@ export default function DataTable() {
                 <ChevronLeftIcon className="w-5 h-5" />
               </button>
               <button
+                title="Next Page"
                 onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
                 className="p-2 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"

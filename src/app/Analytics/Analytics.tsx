@@ -12,11 +12,6 @@ import {
   LineChart, 
   AreaChart, 
   Area, 
-  RadarChart, 
-  PolarGrid, 
-  PolarAngleAxis, 
-  PolarRadiusAxis, 
-  Radar, 
   ScatterChart, 
   Scatter,
   PieChart,
@@ -99,18 +94,8 @@ const regionalPerformance = [
   { region: 'Semarang', performance: 80, population: 800, participation: 72 },
 ];
 
-const politicalTrends = [
-  { candidate: 'Kandidat A', jan: 35, feb: 38, mar: 42, apr: 45 },
-  { candidate: 'Kandidat B', jan: 28, feb: 30, mar: 28, apr: 31 },
-  { candidate: 'Kandidat C', jan: 22, feb: 20, mar: 18, apr: 16 },
-  { candidate: 'Belum Memilih', jan: 15, feb: 12, mar: 12, apr: 8 },
-];
-
-const COLORS = ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
-
 export default function Analytics() {
   const [selectedTimeframe, setSelectedTimeframe] = useState('6months');
-  const [selectedMetric, setSelectedMetric] = useState('response_rate');
 
   return (
     <div className="space-y-8">

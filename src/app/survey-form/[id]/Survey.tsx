@@ -84,6 +84,7 @@ export default function SurveyForm() {
           <div key={q.id}>
             <label className="block font-semibold mb-1">{q.question_text}</label>
             <input
+              title="Answer"
               type="text"
               value={answers[q.id] || ""}
               onChange={(e) => handleChange(q.id, e.target.value)}

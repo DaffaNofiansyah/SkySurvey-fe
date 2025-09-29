@@ -3,19 +3,16 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  ChartBarIcon,
   TableCellsIcon,
   DocumentChartBarIcon,
-  CogIcon,
   HomeIcon,
-  SparklesIcon,
 } from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
   { name: "Survei", href: "/Surveys", icon: DocumentChartBarIcon },
   { name: "Data Respons", href: "/DataTable", icon: TableCellsIcon },
-  { name: "Analitik", href: "/Analytics", icon: ChartBarIcon },
+  // { name: "Analitik", href: "/Analytics", icon: ChartBarIcon },
 ];
 
 export default function Sidebar() {
