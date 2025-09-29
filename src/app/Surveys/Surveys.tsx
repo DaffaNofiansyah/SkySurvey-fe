@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { PlusIcon, EyeIcon, PencilIcon, TrashIcon, DocumentChartBarIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, PencilIcon, TrashIcon, DocumentChartBarIcon } from '@heroicons/react/24/outline';
 import { SurveyStatus } from '../types/survey';
 import api from '../lib/api';
 import API_ENDPOINTS from '../lib/endpoint';
@@ -258,12 +258,6 @@ export default function Surveys() {
 
               <div className="flex justify-between">
                 <div className="flex space-x-2">
-                  <button
-                    title="View Survey"
-                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                  >
-                    <EyeIcon className="w-4 h-4" />
-                  </button>
                   <button
                     title="Edit Survey"
                     onClick={() => { setEditSurveyOpen(true); setTitle(survey.title); setDescription(survey.description); setMaxRespondents(survey.max_respondents); setQuestions(survey.Questions ? survey.Questions.map(q => q.question_text) : []); setTargetSurvey(survey); }}
