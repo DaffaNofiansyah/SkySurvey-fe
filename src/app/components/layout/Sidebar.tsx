@@ -12,7 +12,6 @@ const navigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
   { name: "Survei", href: "/Surveys", icon: DocumentChartBarIcon },
   { name: "Data Respons", href: "/DataTable", icon: TableCellsIcon },
-  // { name: "Analitik", href: "/Analytics", icon: ChartBarIcon },
 ];
 
 export default function Sidebar() {
